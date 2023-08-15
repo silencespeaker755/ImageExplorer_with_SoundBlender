@@ -17,7 +17,7 @@ const createRequest = text => ({
     },
     audioConfig: {
       audioEncoding: 'MP3',
-      speakingRate: 1.2,
+      speakingRate: 1.5,
     },
   }),
   method: 'POST',
@@ -47,17 +47,14 @@ const speech = async (text, path = `./voiceUPUPUP.mp3`) => {
   }
 };
 
-data.captions.forEach(async element => {
-  console.log(element.label);
-  await speech(element.caption, `./assets/${element.label}.mp3`);
-});
+// data.captions.forEach(async element => {
+//   console.log(element.label);
+//   await speech(element.caption, `./assets/${element.label}.mp3`);
+// });
 
-data.maskrcnn.forEach(async element => {
-  console.log(element.label);
-  await speech(element.caption, `./assets/${element.label}.mp3`);
-});
+// data.maskrcnn.forEach(async element => {
+//   console.log(element.label);
+//   await speech(element.caption, `./assets/${element.label}.mp3`);
+// });
 
-// speech(
-//   'An orange bottle with many decorative holes on the side',
-//   './assets/bottle_caption.mp3',
-// );
+speech('background', './assets/background.mp3');

@@ -60,12 +60,16 @@ class Home extends React.Component {
     // const availableVoices = await Speech.getAvailableVoicesAsync();
     // console.log(availableVoices);
     Sound.setCategory('Playback');
-    // this.hello = new Sound('announcement.wav', Sound.MAIN_BUNDLE, error => {
-    //   if (error) {
-    //     console.log('failed to load the sound', error);
-    //     return;
-    //   }
-    // });
+    audioBuffer['background'] = new Sound(
+      'background.mp3',
+      Sound.MAIN_BUNDLE,
+      error => {
+        if (error) {
+          console.log('failed to load the sound', error);
+          return;
+        }
+      },
+    );
     // console.log('announcement' + ' pan: ' + this.hello.getNumberOfChannels());
     data.data[0].json.maskrcnn.forEach(element => {
       audioBuffer[element.label] = new Sound(

@@ -23,6 +23,7 @@ class ImageLayer1 extends React.Component {
     this.state = {
       speaking: false,
       previous: null,
+      pan: 0.0,
     };
 
     Tts.addEventListener('tts-start', event => {
@@ -67,6 +68,8 @@ class ImageLayer1 extends React.Component {
       ((e.nativeEvent.pageX - (this.windowWidth - this.viewWidth) / 2) *
         this.imageWidth) /
       this.viewWidth;
+
+    this.setState({pan: Math.min(-1 + (x / this.imageWidth) * 2, 1)});
 
     // background if out of bound
     if (x < 0 || x > this.imageWidth || y < 0 || y > this.imageHeight) {
@@ -126,7 +129,7 @@ class ImageLayer1 extends React.Component {
         this.object,
         3000,
         this.state.previous,
-        this.maskrcnnData[this.object].pan,
+        this.state.pan,
         audioname => this.setState({previous: audioname}),
         isSpeaking => this.setState({speaking: isSpeaking}),
         true,
@@ -135,16 +138,28 @@ class ImageLayer1 extends React.Component {
       speechWrapper.speak(
         'background',
         this.state.speaking,
-        -1,
+        this.object,
         500,
         this.state.previous,
+        this.state.pan,
+        audioname => this.setState({previous: audioname}),
+        isSpeaking => this.setState({speaking: isSpeaking}),
+        true,
       );
+      // speechWrapper.speak(
+      //   'background',
+      //   this.state.speaking,
+      //   -1,
+      //   500,
+      //   this.state.previous,
+      // );
     }
   }
 
   // navigate to second layer if double clicking on an object
   // if double clicking on background, go back to home
   onDoubleClick() {
+    console.log('Double click');
     if (this.state.speaking && this.state.previous) {
       audioBuffer[this.state.previous].stop();
     } else {
