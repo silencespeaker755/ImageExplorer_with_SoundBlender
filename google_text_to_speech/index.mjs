@@ -1,6 +1,6 @@
 import RNFS from 'fs';
 import fetch from 'cross-fetch';
-import data from '../input/mr_table/table.json' assert {type: 'json'};
+import data from '../input/mr_environment/environment.json' assert {type: 'json'};
 
 const createRequest = text => ({
   headers: {
@@ -47,14 +47,14 @@ const speech = async (text, path = `./voiceUPUPUP.mp3`) => {
   }
 };
 
-// data.captions.forEach(async element => {
-//   console.log(element.label);
-//   await speech(element.caption, `./assets/${element.label}.mp3`);
-// });
+data.captions.forEach(async element => {
+  console.log(element.label);
+  await speech(element.caption, `./assets/${element.label}.mp3`);
+});
 
-// data.maskrcnn.forEach(async element => {
-//   console.log(element.label);
-//   await speech(element.caption, `./assets/${element.label}.mp3`);
-// });
+data.maskrcnn.forEach(async element => {
+  console.log(element.label);
+  await speech(element.caption, `./assets/${element.label}.mp3`);
+});
 
-speech('background', './assets/background.mp3');
+// speech('background', './assets/background.mp3');
