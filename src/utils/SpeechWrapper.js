@@ -20,11 +20,21 @@ class SpeechWrapper {
     repeatTime = 500,
     previousAudio = null,
     pan = 0,
+    volume = 1,
     setAudio = () => {},
     setSpeaking = () => {},
     isFile = false,
   ) => {
     // let speaking = await Speech.isSpeakingAsync();
+    if (
+      (requester == -1 || requester == -2) &&
+      (this.requester == -1 || this.requester == -2) &&
+      speaking
+    ) {
+      this.requester = requester;
+      audioBuffer[previousAudio].setVolume(volume);
+      return;
+    }
     if (requester != this.requester) {
       clearTimeout(this.timer);
       this.requester = requester;
@@ -37,7 +47,26 @@ class SpeechWrapper {
           audioBuffer[previousAudio].stop(() => {
             setSpeaking(true);
             setAudio(label);
-            audioBuffer[label].setPan(pan).play(success => {
+            audioBuffer[label]
+              .setVolume(volume)
+              .setPan(pan)
+              .play(success => {
+                if (success) {
+                  setAudio(null);
+                  setSpeaking(false);
+                } else {
+                  console.log('Sound did not play');
+                }
+              });
+          });
+        } else {
+          Tts.stop();
+          setAudio(label);
+          setSpeaking(true);
+          audioBuffer[label]
+            .setVolume(volume)
+            .setPan(pan)
+            .play(success => {
               if (success) {
                 setAudio(null);
                 setSpeaking(false);
@@ -45,18 +74,6 @@ class SpeechWrapper {
                 console.log('Sound did not play');
               }
             });
-          });
-        } else {
-          Tts.stop();
-          setAudio(label);
-          audioBuffer[label].setPan(pan).play(success => {
-            if (success) {
-              setAudio(null);
-              setSpeaking(false);
-            } else {
-              console.log('Sound did not play');
-            }
-          });
         }
       } else {
         if (previousAudio) {
@@ -80,14 +97,17 @@ class SpeechWrapper {
       if (isFile) {
         setSpeaking(true);
         setAudio(label);
-        audioBuffer[label].setPan(pan).play(success => {
-          if (success) {
-            setAudio(null);
-            setSpeaking(false);
-          } else {
-            console.log('Sound did not play');
-          }
-        });
+        audioBuffer[label]
+          .setVolume(volume)
+          .setPan(pan)
+          .play(success => {
+            if (success) {
+              setAudio(null);
+              setSpeaking(false);
+            } else {
+              console.log('Sound did not play');
+            }
+          });
       } else {
         setAudio(null);
         Tts.speak(label);

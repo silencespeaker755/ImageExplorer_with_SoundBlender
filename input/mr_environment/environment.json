@@ -9,7 +9,8 @@
               785.49
             ],
             "confidence": 1.0,
-            "caption": "A man wearing a head-mounted display, blue jacket, a backpack, and black pants"
+            "caption": "A man wearing a head-mounted display, blue jacket, a backpack, and black pants",
+            "world": true
           },
           {
             "label": "right_woman_description",
@@ -20,7 +21,8 @@
               653.07
             ],
             "confidence": 0.99,
-            "caption": "A woman is wearing a backpack and head-mounted display"
+            "caption": "A woman is wearing a backpack and head-mounted display",
+            "world": true
           },
           {
             "label": "man_head",
@@ -31,7 +33,8 @@
               278.06
             ],
             "confidence": 0.99,
-            "caption": "A head-mounted display worn by a person with straps."
+            "caption": "A head-mounted display worn by a person with straps.",
+            "world": true
           },
           {
             "label": "blue_headset",
@@ -42,7 +45,8 @@
               272.65
             ],
             "confidence": 0.94,
-            "caption": "A dark blue headset"
+            "caption": "A dark blue headset",
+            "world": true
           },
           {
             "label": "black_backpack",
@@ -53,7 +57,8 @@
               498.79
             ],
             "confidence": 0.94,
-            "caption": "A black backpack"
+            "caption": "A black backpack",
+            "world": true
           },
           {
             "label": "black_backpack",
@@ -64,7 +69,8 @@
               551.49
             ],
             "confidence": 0.93,
-            "caption": "a black backpack"
+            "caption": "a black backpack",
+            "world": true
           },
           {
             "label": "right_monitor",
@@ -75,7 +81,8 @@
               272.64
             ],
             "confidence": 0.9,
-            "caption": "A monitor with its screen on"
+            "caption": "A monitor with its screen on",
+            "world": true
           },
           {
             "label": "right_table",
@@ -86,7 +93,8 @@
               402.64
             ],
             "confidence": 0.9,
-            "caption": "A black table"
+            "caption": "A black table",
+            "world": true
           },
           {
             "label": "right_tree",
@@ -97,7 +105,8 @@
               432.64
             ],
             "confidence": 0.9,
-            "caption": "A tree with a digital appearance that is made by several virtual cubes"
+            "caption": "A tree with a digital appearance that is made by several virtual cubes",
+            "world": false
           },
           {
             "label": "left_tree",
@@ -108,7 +117,8 @@
               785
             ],
             "confidence": 0.88,
-            "caption": "A tree with a digital appearance that is made by several virtual cubes, and with some red cubes as decoration"
+            "caption": "A tree with a digital appearance that is made by several virtual cubes, and with some red cubes as decoration",
+            "world": false
           },
           {
             "label": "center_tree",
@@ -119,7 +129,8 @@
               418.92
             ],
             "confidence": 1,
-            "caption": "Two trees side by side with a digital appearance that is made by several virtual cubes"
+            "caption": "Two trees side by side with a digital appearance that is made by several virtual cubes",
+            "world": false
           },
           {
             "label": "center_woman_description",
@@ -130,7 +141,8 @@
               488.92
             ],
             "confidence": 0.84,
-            "caption": "A woman is wearing a head-mounted display and a controller"
+            "caption": "A woman is wearing a head-mounted display and a controller",
+            "world": true
           }
     ],
     "maskrcnn": [
@@ -2556,7 +2568,8 @@
                 ]
               ]
             ],
-            "caption": "A man is pointing to somewhere using his right hand"
+            "caption": "A man is pointing to somewhere using his right hand",
+            "world": true
           },
           {
             "label": "right_person_environment",
@@ -4796,7 +4809,8 @@
                 ]
               ]
             ],
-            "caption": "A woman is walking towards a desk with a computer"
+            "caption": "A woman is walking towards a desk with a computer",
+            "world": true
           },
           {
             "label": "center_person_environment",
@@ -5776,7 +5790,8 @@
                 ]
               ]
             ],
-            "caption": "A woman is looking down at the floor"
+            "caption": "A woman is looking down at the floor",
+            "world": true
           },
           {
             "label": "center_tree_environment",
@@ -6224,7 +6239,8 @@
                 ]
               ]
             ],
-            "caption": "Two trees side by side with a digital appearance that is made by several virtual cubes"
+            "caption": "Two trees side by side with a digital appearance that is made by several virtual cubes",
+            "world": false
           },
           {
             "label": "left_tree_environment",
@@ -6609,6 +6625,8 @@
               ]
             ],
             "caption": "A tree with a digital appearance that is made by several virtual cubes, and with some red cubes as decoration"
+            ,
+            "world": false
           },
           {
             "label": "right_tree_environment",
@@ -6833,6 +6851,8 @@
               ]
             ],
             "caption": "A tree with a digital appearance that is made by several virtual cubes"
+            ,
+            "world": false
           },
           {
             "label": "computer_environment",
@@ -6972,7 +6992,8 @@
                 ]
               ]
             ],
-            "caption": "A computer with its screen on"
+            "caption": "A computer with its screen on",
+            "world": true
           },
           {
             "label": "table_environment",
@@ -7220,9 +7241,273 @@
                 ]
               ]
             ],
-            "caption": "A desk with a monitor, a keyboard, and a mouse above"
+            "caption": "A desk with a monitor, a keyboard, and a mouse above",
+            "world": true
           }
     ],
+    "world": {
+      "label": "rw",
+      "coordinates": [
+        [
+          [
+            1142,
+            9
+          ],
+          [
+            1120,
+            13
+          ],
+          [
+            1103,
+            19
+          ],
+          [
+            1087,
+            24
+          ],
+          [
+            1080,
+            26
+          ],
+          [
+            1107,
+            36
+          ],
+          [
+            1130,
+            41
+          ],
+          [
+            1151,
+            49
+          ],
+          [
+            1172,
+            56
+          ],
+          [
+            1189,
+            64
+          ],
+          [
+            1212,
+            72
+          ],
+          [
+            1211,
+            98
+          ],
+          [
+            1205,
+            128
+          ],
+          [
+            1205,
+            148
+          ],
+          [
+            1203,
+            163
+          ],
+          [
+            1198,
+            183
+          ],
+          [
+            1196,
+            206
+          ],
+          [
+            1193,
+            228
+          ],
+          [
+            1192,
+            250
+          ],
+          [
+            1191,
+            270
+          ],
+          [
+            1184,
+            292
+          ],
+          [
+            1183,
+            317
+          ],
+          [
+            1179,
+            348
+          ],
+          [
+            1178,
+            370
+          ],
+          [
+            1176,
+            394
+          ],
+          [
+            1176,
+            419
+          ],
+          [
+            1173,
+            442
+          ],
+          [
+            1169,
+            472
+          ],
+          [
+            1167,
+            499
+          ],
+          [
+            1163,
+            519
+          ],
+          [
+            1163,
+            536
+          ],
+          [
+            1146,
+            546
+          ],
+          [
+            1127,
+            561
+          ],
+          [
+            1108,
+            573
+          ],
+          [
+            1089,
+            586
+          ],
+          [
+            1069,
+            602
+          ],
+          [
+            1056,
+            614
+          ],
+          [
+            1079,
+            627
+          ],
+          [
+            1097,
+            640
+          ],
+          [
+            1114,
+            646
+          ],
+          [
+            1128,
+            654
+          ],
+          [
+            1142,
+            660
+          ],
+          [
+            1173,
+            659
+          ],
+          [
+            1202,
+            657
+          ],
+          [
+            1231,
+            655
+          ],
+          [
+            1265,
+            652
+          ],
+          [
+            1299,
+            650
+          ],
+          [
+            1335,
+            647
+          ],
+          [
+            1366,
+            645
+          ],
+          [
+            1383,
+            642
+          ],
+          [
+            1401,
+            641
+          ],
+          [
+            1401,
+            610
+          ],
+          [
+            1400,
+            523
+          ],
+          [
+            1400,
+            389
+          ],
+          [
+            1399,
+            263
+          ],
+          [
+            1398,
+            158
+          ],
+          [
+            1399,
+            73
+          ],
+          [
+            1398,
+            5
+          ],
+          [
+            1345,
+            6
+          ],
+          [
+            1289,
+            6
+          ],
+          [
+            1236,
+            6
+          ],
+          [
+            1183,
+            6
+          ],
+          [
+            1157,
+            8
+          ],
+          [
+            1142,
+            9
+          ]
+        ]
+      ]
+    },
     "id": "5da2c5c1-5154-452a-8b37-7c6632b8cd34",
-    "output": "An mixed-reality image that has digital forest mixed with an office space. In the digital forest, there are trees, castles, mountains, grass land. In the office space, there are desk, monitor, keyboad, mouse, and wood-texture floor. Three people are doing individual activity. On your left, there is one man standing next to a tree pointing to somewhere. A woman is far away from your front and is looking down on something. Another woman is walking across reality and virtuality on your right."
+    "output": "An mixed-reality image that has digital natural environment mixed with an office space. There are several people in the image."
 }

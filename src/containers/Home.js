@@ -1,4 +1,4 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, StatusBar, Text, View} from 'react-native';
 import React from 'react';
 import data from '../../input/data.js';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
@@ -34,7 +34,8 @@ class Home extends React.Component {
         },
       ],
     };
-    Tts.setDefaultLanguage('en-IE');
+    Tts.setDefaultLanguage('en-US');
+    Tts.setDefaultRate(0.54);
     Tts.addEventListener('tts-start', event => {
       // this.setState({speaking: true});
     });
@@ -57,11 +58,22 @@ class Home extends React.Component {
   }
 
   async componentDidMount() {
+    StatusBar.setHidden(true);
     // const availableVoices = await Speech.getAvailableVoicesAsync();
     // console.log(availableVoices);
     Sound.setCategory('Playback');
-    audioBuffer['background'] = new Sound(
-      'background.mp3',
+    audioBuffer['forest_ambience'] = new Sound(
+      'forest_ambience.mp3',
+      Sound.MAIN_BUNDLE,
+      error => {
+        if (error) {
+          console.log('failed to load the sound', error);
+          return;
+        }
+      },
+    );
+    audioBuffer['ambience'] = new Sound(
+      'ambience.mp3',
       Sound.MAIN_BUNDLE,
       error => {
         if (error) {
