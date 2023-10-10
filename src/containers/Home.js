@@ -1,4 +1,12 @@
-import {FlatList, StyleSheet, StatusBar, Text, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  StatusBar,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import MasonryList from '@react-native-seoul/masonry-list';
 import React from 'react';
 import data from '../../input/data.js';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
@@ -27,12 +35,7 @@ class Home extends React.Component {
     super();
     this.state = {
       selectedId: -1,
-      itemList: [
-        {
-          id: -1,
-          name: '(Choose a image)',
-        },
-      ],
+      itemList: [],
     };
     Tts.setDefaultLanguage('en-US');
     Tts.setDefaultRate(0.54);
@@ -48,13 +51,13 @@ class Home extends React.Component {
       this.state.itemList.push({
         id: i,
         name: data.data[i].name,
+        url: data.data[i].origin,
       });
     }
 
     // binding
     this.renderItem = this.renderItem.bind(this);
-    this.onSwipe = this.onSwipe.bind(this);
-    this.onDoubleClick = this.onDoubleClick.bind(this);
+    this.handleImagePress = this.handleImagePress.bind(this);
   }
 
   async componentDidMount() {
@@ -82,33 +85,35 @@ class Home extends React.Component {
         }
       },
     );
-    // console.log('announcement' + ' pan: ' + this.hello.getNumberOfChannels());
-    data.data[0].json.maskrcnn.forEach(element => {
-      audioBuffer[element.label] = new Sound(
-        `${element.label}.mp3`,
-        Sound.MAIN_BUNDLE,
-        error => {
-          if (error) {
-            console.log('failed to load the sound', error);
-            return;
-          }
-        },
-      );
-      // audioBuffer[element.label].setPan(element.pan);
-    });
-    data.data[0].json.captions.forEach(element => {
-      audioBuffer[element.label] = new Sound(
-        `${element.label}.mp3`,
-        Sound.MAIN_BUNDLE,
-        error => {
-          if (error) {
-            console.log('failed to load the sound', error);
-            return;
-          }
-        },
-      );
-      // audioBuffer[element.label].setPan(element.pan);
-    });
+    for (var i in data.data) {
+      // console.log('announcement' + ' pan: ' + this.hello.getNumberOfChannels());
+      data.data[i].json.maskrcnn.forEach(element => {
+        audioBuffer[`${i}_${element.label}`] = new Sound(
+          `${element.label}.mp3`,
+          Sound.MAIN_BUNDLE,
+          error => {
+            if (error) {
+              console.log('failed to load the sound', error);
+              return;
+            }
+          },
+        );
+        // audioBuffer[element.label].setPan(element.pan);
+      });
+      data.data[i].json.captions.forEach(element => {
+        audioBuffer[`${i}_${element.label}`] = new Sound(
+          `${element.label}.mp3`,
+          Sound.MAIN_BUNDLE,
+          error => {
+            if (error) {
+              console.log('failed to load the sound', error);
+              return;
+            }
+          },
+        );
+        // audioBuffer[element.label].setPan(element.pan);
+      });
+    }
     // Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
     // setInterval(() => {
     //   console.log("testing");
@@ -116,83 +121,50 @@ class Home extends React.Component {
     // }, 2000);
   }
 
-  // increment or decrement selected index on swiping
-  onSwipe(direction) {
-    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
-    switch (direction) {
-      case SWIPE_LEFT:
-        if (this.state.selectedId > -1) {
-          this.setState({selectedId: this.state.selectedId - 1});
-        }
-        break;
-      case SWIPE_RIGHT:
-        if (this.state.selectedId < data.data.length - 1) {
-          this.setState({selectedId: this.state.selectedId + 1});
-        } else {
-          // at the end of the list
-          Tts.speak('end of the list');
-          // audioBuffer['bottle'].setPan(-1).play(success => {
-          //   if (success) {
-          //     console.log('In play() function callback');
-          //   } else {
-          //     console.log('Sound did not play');
-          //   }
-          // });
-        }
-        break;
-    }
-  }
-
   // navigate to first layer
-  onDoubleClick() {
-    console.log('double click');
-    if (this.state.selectedId != -1) {
-      this.props.navigation.navigate('ImageLayer1', {
-        index: this.state.selectedId,
-        changePosition: true,
-      });
-    }
+  handleImagePress(id) {
+    this.props.navigation.navigate('ImageLayer1', {
+      index: id,
+      changePosition: true,
+    });
   }
 
   // render item in the list
-  renderItem(item) {
+  renderItem({item}) {
     // if this item is selected, give it a border
-    const border = item.item.id == this.state.selectedId ? hasBorder : noBorder;
+    // const border = item.id == this.state.selectedId ? hasBorder : noBorder;
 
     return (
-      <View style={[styles.item, border]}>
-        <Text style={styles.title}>{item.item.name}</Text>
-      </View>
+      <TouchableOpacity
+        style={styles.item}
+        onPress={() => this.handleImagePress(item.id)}>
+        <Image
+          source={item.url}
+          style={{width: 300, height: 200, borderRadius: 10}}
+        />
+      </TouchableOpacity>
     );
   }
 
   render() {
-    Tts.speak(this.state.itemList[this.state.selectedId + 1].name);
+    // Tts.speak(this.state.itemList[this.state.selectedId + 1].name);
 
     // config for swiping
-    const config = {
-      velocityThreshold: 0.3,
-      directionalOffsetThreshold: 80,
-    };
+    // const config = {
+    //   velocityThreshold: 0.3,
+    //   directionalOffsetThreshold: 80,
+    // };
 
     return (
       <View style={styles.container}>
-        <GestureRecognizer
-          onSwipe={(direction, state) => this.onSwipe(direction)}
-          config={config}>
-          <DoubleClick
-            style={styles.container}
-            timeout={300}
-            onDoubleClick={this.onDoubleClick}>
-            <FlatList
-              data={this.state.itemList}
-              renderItem={this.renderItem}
-              keyExtractor={item => item.id}
-              extraData={this.state.selectedId}
-              contentContainerStyle={styles.container}
-            />
-          </DoubleClick>
-        </GestureRecognizer>
+        <MasonryList
+          data={this.state.itemList}
+          keyExtractor={item => item.id}
+          renderItem={this.renderItem}
+          numColumns={1}
+          onRefresh={() => refetch({first: ITEM_CNT})}
+          style={styles.scrollview}
+        />
       </View>
     );
   }
@@ -204,10 +176,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
   },
+  scrollview: {
+    justifyContent: 'center',
+  },
   item: {
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    marginTop: 8,
+    // marginHorizontal: 16,
   },
   title: {
     fontSize: 16,

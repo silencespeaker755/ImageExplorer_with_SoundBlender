@@ -165,7 +165,7 @@ class ImageLayer1 extends React.Component {
     this.getPointingObject(e);
     if (this.object != -1) {
       speechWrapper.speak(
-        this.maskrcnnData[this.object].label,
+        `${this.index}_${this.maskrcnnData[this.object].label}`,
         this.state.speaking,
         this.object,
         3000,
@@ -234,11 +234,11 @@ class ImageLayer1 extends React.Component {
       vrBackground: false,
     });
     if (this.object != -1) {
-      console.log('navigating');
-      this.props.navigation.navigate('ImageLayer2', {
-        imageIndex: this.index,
-        objectIndex: this.object,
-      });
+      // console.log('navigating');
+      // this.props.navigation.navigate('ImageLayer2', {
+      //   imageIndex: this.index,
+      //   objectIndex: this.object,
+      // });
     } else {
       this.props.navigation.navigate('Home', {changePort: true});
     }
